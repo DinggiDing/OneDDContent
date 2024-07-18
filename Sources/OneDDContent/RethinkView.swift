@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
-import ConcentricOnboarding
 
-public struct SwiftUIView: View {
-    @State private var currentIndex: Int = 0
+public struct RethinkView: View {
+    @State private var pageNumber: Int = 0
 
     
     // public initializer 추가
@@ -18,19 +17,13 @@ public struct SwiftUIView: View {
     }
     
     public var body: some View {
-        ConcentricOnboardingView(pageContents: MockData.pages.map { (PageView(page: $0), $0.color) })
-            .duration(1.0)
-            .nextIcon("chevron.forward")
-            .animationDidEnd {
-                print("Animation Did End")
-            }
+        PageView() 
     }
     
-   
 }
 
 #Preview {
-    SwiftUIView()
+    RethinkView()
 }
 
 public extension Color {
