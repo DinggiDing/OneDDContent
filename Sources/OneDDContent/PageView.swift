@@ -39,8 +39,10 @@ struct PageView: View {
 }
 
 struct IntroView: View {
+    static let store = UserDefaults(suiteName: "group.not-important.etc")
+
     @State private var email: String = ""
-    @AppStorage("reflection") var reflection: [String] = ["","","","",""]
+    @AppStorage("reflection", store: store) var reflection: [String] = ["","","","",""]
     @Binding var intro: PageIntro
     @Binding var keyboardHeight: CGFloat
     var size: CGSize
