@@ -39,10 +39,13 @@ struct PageView: View {
 }
 
 struct IntroView: View {
-    static let store = UserDefaults(suiteName: "group.not-important.etc")
-
     @State private var email: String = ""
-    @AppStorage("reflection", store: store) var reflection: [String] = ["","","","",""]
+    @AppStorage("reflection1") var reflection1: String = ""
+    @AppStorage("reflection2") var reflection2: String = ""
+    @AppStorage("reflection3") var reflection3: String = ""
+    @AppStorage("reflection4") var reflection4: String = ""
+    @AppStorage("reflection5") var reflection5: String = ""
+
     @Binding var intro: PageIntro
     @Binding var keyboardHeight: CGFloat
     var size: CGSize
@@ -76,13 +79,38 @@ struct IntroView: View {
                         .foregroundStyle(.black.opacity(0.8))
                         .padding(.top, 12)
                     
+                    Text("\(filteredPages.firstIndex(of: intro) ?? 0)")
+                
                     /// Custom Indicator View
                     CustomIndicatorView(totalPages: filteredPages.count,
                                         currentPage: filteredPages.firstIndex(of: intro) ?? 0)
                         .padding(.top, 48)
-
-                    CustomTextField(text: $reflection[filteredPages.firstIndex(of: intro) ?? 0], hint: "Answer")
-                        .padding(.top, 28)
+                    
+                    if let index = filteredPages.firstIndex(of: intro) {
+                        switch index {
+                        case 0:
+                            CustomTextField(text: $reflection1, hint: "Answer")
+                                .padding(.top, 28)
+                        case 1:
+                            CustomTextField(text: $reflection2, hint: "Answer")
+                                .padding(.top, 28)
+                        case 2:
+                            CustomTextField(text: $reflection3, hint: "Answer")
+                                .padding(.top, 28)
+                        case 3:
+                            CustomTextField(text: $reflection4, hint: "Answer")
+                                .padding(.top, 28)
+                        case 4:
+                            CustomTextField(text: $reflection4, hint: "Answer")
+                                .padding(.top, 28)
+                        default:
+                            CustomTextField(text: $reflection1, hint: "Answer")
+                                .padding(.top, 28)
+                        }
+//                        CustomTextField(text: $email, hint: "Answer")
+//                            .padding(.top, 28)
+                    }
+                    
 
                 }
                 .padding(.top, 24)
