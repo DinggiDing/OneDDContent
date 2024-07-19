@@ -14,6 +14,7 @@ struct PageView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var keyboardHeight: CGFloat = 0
+    @State private var gotoroot: Bool = false
     
     var body: some View {
         GeometryReader {
@@ -39,9 +40,12 @@ struct PageView: View {
 
 struct IntroView: View {
     @State private var email: String = ""
+    @AppStorage("reflection") var reflection: [String] = ["","","","",""]
     @Binding var intro: PageIntro
     @Binding var keyboardHeight: CGFloat
     var size: CGSize
+    @Environment(\.dismiss) var dismiss
+
     
     init(intro: Binding<PageIntro>, size: CGSize, keyboardHeight: Binding<CGFloat>) {
         self._intro = intro
@@ -62,7 +66,7 @@ struct IntroView: View {
                     
 //                    Spacer(minLength: 0)
                     Text(intro.title)
-                        .font(.system(size: 30))
+                        .font(.system(size: 28))
                         .fontWeight(.black)
                     
                     Text(intro.subtitle)
@@ -75,16 +79,18 @@ struct IntroView: View {
                                         currentPage: filteredPages.firstIndex(of: intro) ?? 0)
                         .padding(.top, 48)
 
-                    CustomTextField(text: $email, hint: "Email Address", leadingIcon: Image(systemName: "envelope"))
+                    CustomTextField(text: $reflection[filteredPages.firstIndex(of: intro) ?? 0], hint: "Answer")
                         .padding(.top, 28)
 
                 }
-                .padding(.top, 64)
+                .padding(.top, 24)
                 
             } //: GEOMETRY
             /// Moving From Up to Down
             .offset(y: showView ? 0 : -size.height / 2)
             .opacity(showView ? 1 : 0)
+            .offset(y: -keyboardHeight/8)
+
             
             
             /// Tile Actions
@@ -94,16 +100,47 @@ struct IntroView: View {
 
                     Spacer(minLength: 80)
                     
-                    Button(action: {
-                        changeIntro()
-                    }, label: {
-                        Text("Next")
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.white)
-                            .frame(width: size.width * 0.8)
-                            .padding(.vertical, 15)
-                            .background(.black, in: .capsule)
-                    })
+                    HStack {
+                        
+                        if intro != pageIntros.first {
+                            Button(action: {
+                                changeIntro(true)
+                            }, label: {
+                                Text("Prev")
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.black)
+                                    .frame(width: size.width * 0.4)
+                                    .padding(.vertical, 15)
+                                    .background(.white, in: .capsule)
+                            })
+                        }
+                        
+                        Button(action: {
+                            if intro == pageIntros.last {
+                                dismiss()
+                            } else {
+                                changeIntro()
+                            }
+                        }, label: {
+                            if intro == pageIntros.last {
+                                Text("Done")
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                    .frame(width: size.width * 0.4)
+                                    .padding(.vertical, 15)
+                                    .background(.black, in: .capsule)
+                            } else {
+                                Text("Next")
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                    .frame(width: size.width * 0.4)
+                                    .padding(.vertical, 15)
+                                    .background(.black, in: .capsule)
+                            }
+                        })
+                        
+                    }
+                    
                     
                     
                 } //: GROUP
@@ -122,25 +159,6 @@ struct IntroView: View {
         /// Moving From Down to Up
         .offset(y: hideWholeView ? size.height / 2 : 0)
         .opacity(hideWholeView ? 0 : 1)
-        /// Back Button
-        .overlay(alignment: .topLeading) {
-            if intro != pageIntros.first {
-                Button(action: {
-                    changeIntro(true)
-                }, label: {
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.black)
-                        .contentShape(.rect)
-                })
-                .padding(10)
-                /// Back button comes from top
-                .offset(y: showView ? 0 : -200)
-                /// Goes up again when inactive
-                .offset(y: hideWholeView ? -200 : 0)
-            }
-        } //: Overlay Back Button
         .onAppear {
             withAnimation(.spring(response: 0.8, dampingFraction: 0.8, blendDuration: 0).delay(0.1)) {
                 self.showView = true
@@ -184,4 +202,24 @@ struct IntroView: View {
 
 #Preview {
     PageView()
+}
+
+extension Array: RawRepresentable where Element: Codable {
+    public init?(rawValue: String) {
+        guard let data = rawValue.data(using: .utf8),
+              let result = try? JSONDecoder().decode([Element].self, from: data)
+        else {
+            return nil
+        }
+        self = result
+    }
+
+    public var rawValue: String {
+        guard let data = try? JSONEncoder().encode(self),
+              let result = String(data: data, encoding: .utf8)
+        else {
+            return "[]"
+        }
+        return result
+    }
 }
