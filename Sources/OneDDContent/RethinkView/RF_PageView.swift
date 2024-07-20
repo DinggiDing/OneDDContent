@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PageView: View {
+struct RF_PageView: View {
     
     //MARK: - Properties
     @State private var activeIntro: PageIntro = pageIntros[0]
@@ -101,7 +101,7 @@ struct IntroView: View {
                             CustomTextField(text: $reflection4, hint: "Answer")
                                 .padding(.top, 28)
                         case 4:
-                            CustomTextField(text: $reflection4, hint: "Answer")
+                            CustomTextField(text: $reflection5, hint: "Answer")
                                 .padding(.top, 28)
                         default:
                             CustomTextField(text: $reflection1, hint: "Answer")
@@ -231,7 +231,7 @@ struct IntroView: View {
 }
 
 #Preview {
-    PageView()
+    RF_PageView()
 }
 
 extension Array: RawRepresentable where Element: Codable {
