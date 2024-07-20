@@ -15,11 +15,15 @@ let package = Package(
             name: "OneDDContent",
             targets: ["OneDDContent"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/notsobigcompany/BigUIPaging.git", from: "0.0.3"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "OneDDContent"
+            name: "OneDDContent",
+            dependencies: ["BigUIPaging"]
         ),
         .testTarget(
             name: "OneDDContentTests",

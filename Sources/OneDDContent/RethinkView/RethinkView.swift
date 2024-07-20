@@ -19,7 +19,7 @@ public struct RethinkView: View {
     public var body: some View {
         NavigationStack {
             NavigationLink(destination: {
-                PageView()
+                RF_PageView()
             }, label: {
                     VStack {
                         Spacer().frame(height: 10)
