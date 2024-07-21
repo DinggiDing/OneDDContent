@@ -8,7 +8,7 @@
 import SwiftUI
 import BigUIPaging
 
-public struct SwiftUIView: View {
+public struct InD_SwiftUIView: View {
     
     @State private var selection: Int = 0
     @AppStorage("reflection1") var reflection1: String = ""
@@ -16,6 +16,7 @@ public struct SwiftUIView: View {
     @AppStorage("reflection3") var reflection3: String = ""
     @AppStorage("reflection4") var reflection4: String = ""
     @AppStorage("reflection5") var reflection5: String = ""
+    @State private var istouched: Bool = false
 
     
     // public initializer 추가
@@ -31,7 +32,10 @@ public struct SwiftUIView: View {
 
             }
         }
-        .frame(minHeight: 105)
+        .onTapGesture {
+            istouched.toggle()
+        }
+        .frame(minHeight: istouched ? 210 : 105)
         .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
 
         .pageViewStyle(.cardDeck)
@@ -65,7 +69,7 @@ public struct SwiftUIView: View {
 }
 
 #Preview {
-    SwiftUIView()
+    InD_SwiftUIView()
 }
 
 struct DeckStyleSubView: View {

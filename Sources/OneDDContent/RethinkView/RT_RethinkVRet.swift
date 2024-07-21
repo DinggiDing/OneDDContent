@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct RethinkView: View {
+public struct RT_RethinkVRet: View {
     @State private var pageNumber: Int = 0
 
     
@@ -65,10 +65,12 @@ public struct RethinkView: View {
 }
 
 #Preview {
-    RethinkView()
+    RT_RethinkVRet()
 }
 
 public extension Color {
     static let blackblue55 = Color(UIColor(named: "blackblue55", in: .module, compatibleWith: nil)!)
     static let whiteblue = Color(UIColor(named: "whiteblue", in: .module, compatibleWith: nil)!)
+    static let maingra = Color(UIColor(named: "maingra", in: .module, compatibleWith: nil)!)
+    static let mainpoint = Color(UIColor(named: "mainpoint", in: .module, compatibleWith: nil)!)
 }
