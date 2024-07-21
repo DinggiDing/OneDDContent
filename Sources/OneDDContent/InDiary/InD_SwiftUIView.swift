@@ -35,7 +35,7 @@ public struct InD_SwiftUIView: View {
         .onTapGesture {
             istouched.toggle()
         }
-        .frame(minHeight: istouched ? 210 : 105)
+        .frame(minHeight: istouched ? 210 : 110)
         .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
 
         .pageViewStyle(.cardDeck)
@@ -81,11 +81,12 @@ struct DeckStyleSubView: View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
                 Rectangle()
-                    .fill(.white)
+                    .fill(Color.whiteblue)
                     .ignoresSafeArea()
                 HStack {
                     Rectangle().frame(width: 2, alignment: .center)
-                        .foregroundStyle(.pink)
+                        .foregroundStyle(Color.maingra)
+                        .shadow(color: .maingra.opacity(0.8), radius: 5, x: 0, y: 5)
                         .padding(.vertical, 20)
                     VStack(alignment: .leading, spacing: 12) {
                         //                    Text("[ \(title) ]", bundle: .module)
