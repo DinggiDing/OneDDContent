@@ -71,20 +71,31 @@ struct IntroView: View {
                     
 //                    Spacer(minLength: 0)
                     Text(intro.title)
-                        .font(.system(size: 28))
+                        .font(.system(size: 24))
                         .fontWeight(.black)
                     
                     Text(intro.subtitle)
-                        .font(.system(size: 16))
-                        .foregroundStyle(.black.opacity(0.8))
+                        .font(.system(size: 14))
+                        .foregroundStyle(.black.opacity(0.6))
                         .padding(.top, 12)
                     
-                    Text("\(filteredPages.firstIndex(of: intro) ?? 0)")
+                    HStack(alignment: .bottom) {
+                        Text("Question \((filteredPages.firstIndex(of: intro) ?? 0) + 1)")
+                            .fontWeight(.semibold)
+                        Text("of 5")
+                            .fontWeight(.regular)
+                            .foregroundStyle(.black.opacity(0.4))
+                        Spacer()
+                    }
+                    .padding(.top, 48)
+
                 
                     /// Custom Indicator View
                     CustomIndicatorView(totalPages: filteredPages.count,
                                         currentPage: filteredPages.firstIndex(of: intro) ?? 0)
-                        .padding(.top, 48)
+                        .frame(width: size.width)
+                        .padding(.top, 4)
+
                     
                     if let index = filteredPages.firstIndex(of: intro) {
                         switch index {
@@ -113,7 +124,7 @@ struct IntroView: View {
                     
 
                 }
-                .padding(.top, 24)
+                .padding(.top, 32)
                 
             } //: GEOMETRY
             /// Moving From Up to Down
@@ -138,7 +149,7 @@ struct IntroView: View {
                             }, label: {
                                 Text("Prev")
                                     .fontWeight(.semibold)
-                                    .foregroundStyle(.black)
+                                    .foregroundStyle(Color.blackblue55)
                                     .frame(width: size.width * 0.4)
                                     .padding(.vertical, 15)
                                     .background(.white, in: .capsule)
@@ -165,7 +176,7 @@ struct IntroView: View {
                                     .foregroundStyle(.white)
                                     .frame(width: size.width * 0.4)
                                     .padding(.vertical, 15)
-                                    .background(.black, in: .capsule)
+                                    .background(Color.blackblue55, in: .capsule)
                             }
                         })
                         
