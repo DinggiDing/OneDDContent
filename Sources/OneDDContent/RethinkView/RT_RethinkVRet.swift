@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct RT_RethinkVRet: View {
     @State private var pageNumber: Int = 0
-
+    @State private var isSheeted: Bool = false
     
     // public initializer 추가
     public init() {
@@ -17,10 +17,10 @@ public struct RT_RethinkVRet: View {
     }
     
     public var body: some View {
-        NavigationStack {
-            NavigationLink(destination: {
-                RF_PageView()
-            }, label: {
+//        NavigationStack {
+//            NavigationLink(destination: {
+//                RF_PageView()
+//            }, label: {
                     VStack {
                         Spacer().frame(height: 10)
                         HStack {
@@ -58,8 +58,14 @@ public struct RT_RethinkVRet: View {
                         }
                         .padding()
                     }
-            })
-        }
+                    .onTapGesture {
+                        isSheeted.toggle()
+                    }
+                    .sheet(isPresented: $isSheeted, content: {
+                        RF_PageView()
+                    })
+//            })
+//        }
     }
     
 }
