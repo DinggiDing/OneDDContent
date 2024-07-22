@@ -17,61 +17,67 @@ public struct RT_RethinkVRet: View {
     }
     
     public var body: some View {
-//        NavigationStack {
-//            NavigationLink(destination: {
-//                RF_PageView()
-//            }, label: {
-                    VStack {
-                        Spacer().frame(height: 10)
+
+            VStack {
+                Spacer().frame(height: 10)
+                HStack {
+                    ZStack(alignment: .bottom) {
+                        Image("reflect", bundle: .module)
+                            .resizable()
+                            .frame(height: 231)
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                        
+                        
+                        VStack {
+                            LinearGradient(colors: [Color.clear, Color.clear, Color.black], startPoint: .top, endPoint: .bottom)
+                                .clipShape(
+                                    .rect(
+                                        topLeadingRadius: 0,
+                                        bottomLeadingRadius: 20,
+                                        bottomTrailingRadius: 20,
+                                        topTrailingRadius: 0
+                                    )
+                                )
+                        }
+                        
                         HStack {
-                            ZStack(alignment: .bottom) {
-                                Image("reflect", bundle: .module)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
-                                
-                                ZStack {
-                                    Rectangle()
-                                        .fill(.white)
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 10) {
-                                            Text("오늘 하루 되돌아 보기")
-                                                .font(.system(.title3, weight: .black))
-                                                .foregroundStyle(.black)
-                                                .multilineTextAlignment(.leading)
-                                            Text("5개의 질문")
-                                                .font(.system(.caption))
-                                                .foregroundStyle(.black)
-                                                .multilineTextAlignment(.leading)
-                                        }
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
-                                            .foregroundStyle(.black)
-                                    }
-                                    .padding()
-                                }
-                                .frame(height: 68)
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("오늘 하루 되돌아 보기")
+                                    .font(.system(.headline, weight: .black))
+                                    .foregroundStyle(.white)
+                                    .multilineTextAlignment(.leading)
+                                Text("5개의 질문")
+                                    .font(.system(.caption))
+                                    .foregroundStyle(.white)
+                                    .multilineTextAlignment(.leading)
                             }
-                            .frame(width: 341, height: 231)
-                            
                             Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.white)
                         }
                         .padding()
+
                     }
-                    .onTapGesture {
-                        isSheeted.toggle()
-                    }
-                    .sheet(isPresented: $isSheeted, content: {
-                        RF_PageView()
-                    })
-//            })
-//        }
+                    .frame(height: 231)
+                }
+                .onTapGesture {
+                    isSheeted.toggle()
+                }
+                .padding()
+            }
+            
+            .sheet(isPresented: $isSheeted, content: {
+                RF_PageView()
+            })
+
     }
     
 }
 
 #Preview {
     RT_RethinkVRet()
+        .background(Color.gray)
 }
 
 public extension Color {
