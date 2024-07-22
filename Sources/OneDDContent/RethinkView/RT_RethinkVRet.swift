@@ -70,6 +70,9 @@ public struct RT_RethinkVRet: View {
             .sheet(isPresented: $isSheeted, content: {
                 RF_PageView()
             })
+            .transaction({ transaction in
+                transaction.disablesAnimations = false
+            })
 
     }
     
