@@ -25,28 +25,30 @@ public struct InD_SwiftUIView: View {
     }			
     
     public var body: some View {
-        PageView(selection: $selection) {
-            ForEach(0..<5, id: \.self) { id in
-
-                DeckStyleSubView(value: id, title: DiaryData.title[id], bodytext: reflectionValue(for: id))
-
+        VStack(spacing: 0) {
+            PageView(selection: $selection) {
+                ForEach(0..<5, id: \.self) { id in
+                    
+                    DeckStyleSubView(value: id, title: DiaryData.title[id], bodytext: reflectionValue(for: id))
+                    
+                }
             }
+            .onTapGesture {
+                istouched.toggle()
+            }
+            .frame(minHeight: istouched ? 210 : 110)
+            .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
+            
+            .pageViewStyle(.cardDeck)
+            .pageViewCardCornerRadius(20)
+            
+            PageIndicator(
+                selection: $selection,
+                total: 5
+            )
+            .pageIndicatorBackgroundStyle(.prominent)
+            
         }
-        .onTapGesture {
-            istouched.toggle()
-        }
-        .frame(minHeight: istouched ? 210 : 110)
-        .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
-
-        .pageViewStyle(.cardDeck)
-        .pageViewCardCornerRadius(20)
-        
-        PageIndicator(
-            selection: $selection,
-            total: 5
-        )
-        .pageIndicatorBackgroundStyle(.prominent)
-    
     }
     
     // Function to get the reflection value by id

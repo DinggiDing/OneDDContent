@@ -80,7 +80,7 @@ public struct RT_RethinkVRet: View {
 
 #Preview {
     RT_RethinkVRet()
-        .background(Color.gray)
+        .background(Color.whiteblue)
 }
 
 public extension Color {
