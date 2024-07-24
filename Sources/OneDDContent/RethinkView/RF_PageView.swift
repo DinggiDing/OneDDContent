@@ -70,7 +70,11 @@ struct IntroView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     
 //                    Spacer(minLength: 0)
-                    Text(intro.title)
+                    
+//                    HighlightedText("오늘 아침에 일어나서 세운 ###목표$$$는 무엇이었나요?")
+//                        .font(.system(size: 24))
+//                        .fontWeight(.black)
+                    HighlightedText(intro.title)
                         .font(.system(size: 24))
                         .fontWeight(.black)
                     
@@ -262,5 +266,58 @@ extension Array: RawRepresentable where Element: Codable {
             return "[]"
         }
         return result
+    }
+}
+
+struct HighlightedText: View{
+    let text: Text
+    
+    private static let regularExpression = try! NSRegularExpression(
+        pattern: "###(?<content>((?!\\$\\$\\$).)*)\\$\\$\\$"
+    )
+    
+    private struct SubstringRange {
+        let content: NSRange
+        let full: NSRange
+    }
+    
+    init(_ string: String) {
+        let ranges = Self.regularExpression
+            .matches(
+                in: string,
+                options: [],
+                range: NSRange(location: 0, length: string.count)
+            )
+            .map { match in
+                SubstringRange(
+                    content: match.range(withName: "content"),
+                    full: match.range(at: 0)
+                )
+            }
+        var nextNotProcessedSymbol = 0
+        var text = Text("")
+        let nsString = string as NSString
+        func appendSubstringStartingNextIfNeeded(until endLocation: Int) {
+            if nextNotProcessedSymbol < endLocation {
+                text = text + Text(nsString.substring(
+                    with: NSRange(
+                        location: nextNotProcessedSymbol,
+                        length: endLocation - nextNotProcessedSymbol
+                    )
+                ))
+            }
+        }
+        for range in ranges {
+            appendSubstringStartingNextIfNeeded(until: range.full.location)
+            text = text + Text(nsString.substring(with: range.content))
+                .foregroundColor(Color.red)
+            nextNotProcessedSymbol = range.full.upperBound
+        }
+        appendSubstringStartingNextIfNeeded(until: string.count)
+        self.text = text
+    }
+    
+    var body: some View {
+        text
     }
 }

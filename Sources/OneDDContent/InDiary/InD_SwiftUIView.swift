@@ -86,9 +86,9 @@ struct DeckStyleSubView: View {
                     .fill(Color.whiteblue)
                     .ignoresSafeArea()
                 HStack {
-                    Rectangle().frame(width: 2, alignment: .center)
+                    Rectangle().frame(width: 4, alignment: .center)
                         .foregroundStyle(Color.maingra)
-                        .shadow(color: .maingra.opacity(0.8), radius: 5, x: 0, y: 5)
+                        .shadow(color: .maingra.opacity(0.4), radius: 5, x: 0, y: 5)
                         .padding(.vertical, 20)
                     VStack(alignment: .leading, spacing: 12) {
                         //                    Text("[ \(title) ]", bundle: .module)
