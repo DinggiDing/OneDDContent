@@ -10,6 +10,7 @@ import SwiftUI
 public struct RT_RethinkVRet: View {
     @State private var pageNumber: Int = 0
     @State private var isSheeted: Bool = false
+    @AppStorage("reflectionDate") var reflectionDate = ""
     
     // public initializer 추가
     public init() {
@@ -63,6 +64,7 @@ public struct RT_RethinkVRet: View {
                 }
                 .onTapGesture {
                     isSheeted.toggle()
+                    reflectionDate = formatDate(Date())
                 }
                 .padding()
             }
@@ -73,7 +75,27 @@ public struct RT_RethinkVRet: View {
             .transaction({ transaction in
                 transaction.disablesAnimations = false
             })
+            
+			
+    }
+    
+    func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYYMMDD"
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour], from: Date.now)
+        let hour = components.hour ?? 0
+ 
+        var startDate = Date()
+        
+        if hour < 11 {
+            startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+            return formatter.string(from: startDate)
 
+        } else {
+            return formatter.string(from: date)
+        }
     }
     
 }
