@@ -8,20 +8,26 @@
 import SwiftUI
 
 struct RF_PageView: View {
-    
+    @Environment(\.locale) var locale // Access the current locale
+
     //MARK: - Properties
-    @State private var activeIntro: PageIntro = pageIntros[0]
+//    @State private var activeIntro: PageIntro = getPageIntros(for: locale)[0]
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var keyboardHeight: CGFloat = 0
     @State private var gotoroot: Bool = false
+    @StateObject private var pageIntroProvider: PageIntroProvider
+        
+    init() {
+        _pageIntroProvider = StateObject(wrappedValue: PageIntroProvider(locale: Locale.current))
+    }
     
     var body: some View {
         GeometryReader {
             let size = $0.size
             
-            IntroView(intro: $activeIntro, size: size, keyboardHeight: $keyboardHeight)
-            
+            IntroView(intro: $pageIntroProvider.pageIntros[0], all: $pageIntroProvider.pageIntros, size: size, keyboardHeight: $keyboardHeight)
+    
         } //: GEOMETRY
         .padding(15)
         /// Disabling native keyboard push
@@ -36,6 +42,9 @@ struct RF_PageView: View {
         })
         .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0), value: keyboardHeight)
     }
+    
+    // Function to get intros based on locale
+    
 }
 
 struct IntroView: View {
@@ -45,15 +54,17 @@ struct IntroView: View {
     @AppStorage("reflection3") var reflection3: String = ""
     @AppStorage("reflection4") var reflection4: String = ""
     @AppStorage("reflection5") var reflection5: String = ""
-
+    
     @Binding var intro: PageIntro
+    @Binding var all: [PageIntro]
+
     @Binding var keyboardHeight: CGFloat
     var size: CGSize
     @Environment(\.dismiss) var dismiss
-
     
-    init(intro: Binding<PageIntro>, size: CGSize, keyboardHeight: Binding<CGFloat>) {
+    init(intro: Binding<PageIntro>, all: Binding<[PageIntro]>, size: CGSize, keyboardHeight: Binding<CGFloat>) {
         self._intro = intro
+        self._all = all
         self.size = size
         self._keyboardHeight = keyboardHeight
     }
@@ -70,7 +81,6 @@ struct IntroView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     
 //                    Spacer(minLength: 0)
-                    
 //                    HighlightedText("오늘 아침에 일어나서 세운 ###목표$$$는 무엇이었나요?")
 //                        .font(.system(size: 24))
 //                        .fontWeight(.black)
@@ -92,14 +102,12 @@ struct IntroView: View {
                         Spacer()
                     }
                     .padding(.top, 48)
-
                 
                     /// Custom Indicator View
                     CustomIndicatorView(totalPages: filteredPages.count,
                                         currentPage: filteredPages.firstIndex(of: intro) ?? 0)
                         .frame(width: size.width)
                         .padding(.top, 4)
-
                     
                     if let index = filteredPages.firstIndex(of: intro) {
                         switch index {
@@ -125,17 +133,13 @@ struct IntroView: View {
 //                        CustomTextField(text: $email, hint: "Answer")
 //                            .padding(.top, 28)
                     }
-                    
-
                 }
                 .padding(.top, 32)
-                
             } //: GEOMETRY
             /// Moving From Up to Down
             .offset(y: showView ? 0 : -size.height / 2)
             .opacity(showView ? 1 : 0)
             .offset(y: -keyboardHeight/8)
-
             
             
             /// Tile Actions
@@ -147,7 +151,7 @@ struct IntroView: View {
                     
                     HStack {
                         
-                        if intro != pageIntros.first {
+                        if intro != all.first {
                             Button(action: {
                                 changeIntro(true)
                             }, label: {
@@ -161,13 +165,13 @@ struct IntroView: View {
                         }
                         
                         Button(action: {
-                            if intro == pageIntros.last {
+                            if intro == all.last {
                                 dismiss()
                             } else {
                                 changeIntro()
                             }
                         }, label: {
-                            if intro == pageIntros.last {
+                            if intro == all.last {
                                 Text("Done")
                                     .fontWeight(.semibold)
                                     .foregroundStyle(.white)
@@ -183,9 +187,7 @@ struct IntroView: View {
                                     .background(Color.blackblue55, in: .capsule)
                             }
                         })
-                        
                     }
-                    
                     
                     
                 } //: GROUP
@@ -221,12 +223,12 @@ struct IntroView: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let index = pageIntros.firstIndex(of: intro),
-                (isPrevious ? index != 0 : index != pageIntros.count - 1) {
+            if let index = all.firstIndex(of: intro),
+                (isPrevious ? index != 0 : index != all.count - 1) {
                 
-                intro = isPrevious ? pageIntros[index - 1] : pageIntros[index + 1]
+                intro = isPrevious ? all[index - 1] : all[index + 1]
             } else {
-                intro = isPrevious ? pageIntros[0] : pageIntros[pageIntros.count - 1]
+                intro = isPrevious ? all[0] : all[all.count - 1]
             }
             
             /// Re-updating as Split Page
@@ -240,7 +242,7 @@ struct IntroView: View {
     }
     
     var filteredPages: [PageIntro] {
-        return pageIntros.filter( { !$0.displaysAction })
+        return all.filter( { !$0.displaysAction })
     }
     
 }

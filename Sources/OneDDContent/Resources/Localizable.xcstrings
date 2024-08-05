@@ -1,7 +1,230 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
 
+    },
+    "‘오늘의 작은 한 걸음이 내일의 큰 도약이 된다.'" : {
+
+    },
+    "‘오늘의 작은 한 걸음이 내일의 큰 도약이 된다.’\n‘기록은 기억을 붙잡는 사슬이다.’" : {
+
+    },
+    "5개의 질문" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 questions"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5つの質問"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5개의 질문"
+          }
+        }
+      }
+    },
+    "Done" : {
+
+    },
+    "Next" : {
+
+    },
+    "of 5" : {
+
+    },
+    "Prev" : {
+
+    },
+    "Q1. 오늘 세운 목표는 무엇이었나요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q1. What was your goal for today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q1. 今日立てた目標は何でしたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q1. 오늘 세운 목표는 무엇이었나요?"
+          }
+        }
+      }
+    },
+    "Q2. 그 도전을 어떻게 달성했나요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q2. How did you achieve that challenge?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q2. そのチャレンジをどのように達成しましたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q2. 그 도전을 어떻게 달성했나요?"
+          }
+        }
+      }
+    },
+    "Q3. 누구와 가장 많은 상호작용을 했나요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q3. Who did you interact with the most today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q3. 誰と最も多く交流しましたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q3. 누구와 가장 많은 상호작용을 했나요?"
+          }
+        }
+      }
+    },
+    "Q4. 오늘 배운 새로운 것은 무엇인가요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q4. What is something new you learned today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q4. 今日学んだ新しいことは何ですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q4. 오늘 배운 새로운 것은 무엇인가요?"
+          }
+        }
+      }
+    },
+    "Q5. 오늘 감사했던 일은 무엇인가요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q5. What are you grateful for today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q5. 今日感謝したことは何ですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Q5. 오늘 감사했던 일은 무엇인가요?"
+          }
+        }
+      }
+    },
+    "Question %lld" : {
+
+    },
+    "감성형" : {
+
+    },
+    "격려형" : {
+
+    },
+    "마음을 정리할 시간이 필요하지 않으신가요?" : {
+
+    },
+    "마음을 정리할 시간이 필요하지 않으신가요?\n오늘 하루의 감정을 일기로 풀어보세요." : {
+
+    },
+    "명언형" : {
+
+    },
+    "반성형" : {
+
+    },
+    "오늘 하루 되돌아 보기" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reflect on Today"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日一日を振り返る"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 하루 되돌아 보기"
+          }
+        }
+      }
+    },
+    "오늘 하루 중 가장 행복했던 순간은 무엇인가요?" : {
+
+    },
+    "오늘 하루 중 가장 행복했던 순간은 무엇인가요?\n오늘 무슨 일이 있었나요? 지금 적어보세요!" : {
+
+    },
+    "오늘 하루를 되돌아보며 느낀 점을 적어보세요." : {
+
+    },
+    "오늘 하루를 되돌아보며 느낀 점을 적어보세요.\n자신을 돌아볼 시간을 가지세요." : {
+
+    },
+    "오늘의 일기를 작성하고 성취감을 느껴보세요!" : {
+
+    },
+    "오늘의 일기를 작성하고 성취감을 느껴보세요!\n작은 기록이 큰 변화를 만듭니다!" : {
+
+    },
+    "질문형" : {
+
+    }
   },
   "version" : "1.0"
 }
