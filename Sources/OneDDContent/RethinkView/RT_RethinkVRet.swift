@@ -102,7 +102,7 @@ public struct RT_RethinkVRet: View {
 
 #Preview {
     RT_RethinkVRet()
-        .environment(\.locale, .init(identifier: "en"))
+        .environment(\.locale, .init(identifier: "ja"))
 }
 
 public extension Color {

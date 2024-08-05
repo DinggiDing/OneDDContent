@@ -11,22 +11,17 @@ struct RF_PageView: View {
     @Environment(\.locale) var locale // Access the current locale
 
     //MARK: - Properties
-//    @State private var activeIntro: PageIntro = getPageIntros(for: locale)[0]
+    @State private var activeIntro: PageIntro = pageIntros[0]
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var keyboardHeight: CGFloat = 0
     @State private var gotoroot: Bool = false
-    @StateObject var pageIntroProvider: PageIntroProvider
-        
-    init() {
-        _pageIntroProvider = StateObject(wrappedValue: PageIntroProvider(locale: Locale.current))
-    }
     
     var body: some View {
         GeometryReader {
             let size = $0.size
             
-            IntroView(intro: $pageIntroProvider.pageIntros[0], all: $pageIntroProvider.pageIntros, size: size, keyboardHeight: $keyboardHeight)
+            IntroView(intro: $activeIntro, size: size, keyboardHeight: $keyboardHeight)
     
         } //: GEOMETRY
         .padding(15)
@@ -56,15 +51,13 @@ struct IntroView: View {
     @AppStorage("reflection5") var reflection5: String = ""
     
     @Binding var intro: PageIntro
-    @Binding var all: [PageIntro]
 
     @Binding var keyboardHeight: CGFloat
     var size: CGSize
     @Environment(\.dismiss) var dismiss
     
-    init(intro: Binding<PageIntro>, all: Binding<[PageIntro]>, size: CGSize, keyboardHeight: Binding<CGFloat>) {
+    init(intro: Binding<PageIntro>, size: CGSize, keyboardHeight: Binding<CGFloat>) {
         self._intro = intro
-        self._all = all
         self.size = size
         self._keyboardHeight = keyboardHeight
     }
@@ -88,7 +81,10 @@ struct IntroView: View {
                         .font(.system(size: 24))
                         .fontWeight(.black)
                     
-                    Text(intro.subtitle)
+                    Text(NSLocalizedString(intro.subtitle, bundle: .module, comment: ""))
+                        .font(.system(size: 14))
+                        .foregroundStyle(.black.opacity(0.6))
+                    Text(NSLocalizedString("\(intro.subtitle)", bundle: .module, comment: ""))
                         .font(.system(size: 14))
                         .foregroundStyle(.black.opacity(0.6))
                         .padding(.top, 12)
@@ -151,7 +147,7 @@ struct IntroView: View {
                     
                     HStack {
                         
-                        if intro != all.first {
+                        if intro != pageIntros.first {
                             Button(action: {
                                 changeIntro(true)
                             }, label: {
@@ -165,13 +161,13 @@ struct IntroView: View {
                         }
                         
                         Button(action: {
-                            if intro == all.last {
+                            if intro == pageIntros.last {
                                 dismiss()
                             } else {
                                 changeIntro()
                             }
                         }, label: {
-                            if intro == all.last {
+                            if intro == pageIntros.last {
                                 Text("Done")
                                     .fontWeight(.semibold)
                                     .foregroundStyle(.white)
@@ -198,7 +194,7 @@ struct IntroView: View {
             /// Moving From Down to Up
             .offset(y: showView ? 0 : size.height / 2)
             .opacity(showView ? 1 : 0)
-            /// Manually pushing Keyboard
+            /// ManupageIntrosy pushing Keyboard
             .offset(y: -keyboardHeight)
 
                                     
@@ -223,12 +219,12 @@ struct IntroView: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let index = all.firstIndex(of: intro),
-                (isPrevious ? index != 0 : index != all.count - 1) {
+            if let index = pageIntros.firstIndex(of: intro),
+                (isPrevious ? index != 0 : index != pageIntros.count - 1) {
                 
-                intro = isPrevious ? all[index - 1] : all[index + 1]
+                intro = isPrevious ? pageIntros[index - 1] : pageIntros[index + 1]
             } else {
-                intro = isPrevious ? all[0] : all[all.count - 1]
+                intro = isPrevious ? pageIntros[0] : pageIntros[pageIntros.count - 1]
             }
             
             /// Re-updating as Split Page
@@ -242,7 +238,7 @@ struct IntroView: View {
     }
     
     var filteredPages: [PageIntro] {
-        return all.filter( { !$0.displaysAction })
+        return pageIntros.filter( { !$0.displaysAction })
     }
     
 }
@@ -286,11 +282,13 @@ struct HighlightedText: View{
     }
     
     init(_ string: String) {
+        let localizedString = NSLocalizedString(string, bundle: .module, comment: "")
+
         let ranges = Self.regularExpression
             .matches(
-                in: string,
+                in: localizedString,
                 options: [],
-                range: NSRange(location: 0, length: string.count)
+                range: NSRange(location: 0, length: localizedString.count)
             )
             .map { match in
                 SubstringRange(
@@ -300,7 +298,7 @@ struct HighlightedText: View{
             }
         var nextNotProcessedSymbol = 0
         var text = Text("")
-        let nsString = string as NSString
+        let nsString = localizedString as NSString
         func appendSubstringStartingNextIfNeeded(until endLocation: Int) {
             if nextNotProcessedSymbol < endLocation {
                 text = text + Text(nsString.substring(
@@ -317,7 +315,7 @@ struct HighlightedText: View{
                 .foregroundColor(Color.red)
             nextNotProcessedSymbol = range.full.upperBound
         }
-        appendSubstringStartingNextIfNeeded(until: string.count)
+        appendSubstringStartingNextIfNeeded(until: localizedString.count)
         self.text = text
     }
     

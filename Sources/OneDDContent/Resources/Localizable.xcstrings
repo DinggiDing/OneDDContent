@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "(intro.subtitle)" : {
+
+    },
     "5개의 질문" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -157,6 +160,121 @@
     "Question %lld" : {
 
     },
+    "그 도전을 ###어떻게$$$ 달성했나요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "###How$$$ did you achieve that challenge?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "そのチャレンジを###どのように$$$達成しましたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그 도전을 ###어떻게$$$ 달성했나요?"
+          }
+        }
+      }
+    },
+    "오늘 ###감사했던 일$$$은 무엇인가요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What were you ###grateful$$$ for today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日###感謝したこと$$$は何ですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 ###감사했던 일$$$은 무엇인가요?"
+          }
+        }
+      }
+    },
+    "오늘 ###누구$$$와 가장 많은 상호작용을 했나요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "###Who$$$ did you interact with the most today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日###誰$$$と最も多く交流しましたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 ###누구$$$와 가장 많은 상호작용을 했나요?"
+          }
+        }
+      }
+    },
+    "오늘 배운 ###새로운 것$$$은 무엇인가요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What ###new thing$$$ did you learn today?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日学んだ###新しいこと$$$は何ですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 배운 ###새로운 것$$$은 무엇인가요?"
+          }
+        }
+      }
+    },
+    "오늘 아침에 일어나서 세운 ###목표$$$는 무엇이었나요?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What was ###your goal$$$ when you woke up this morning?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日の朝、起きてから立てた###目標$$$は何でしたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 아침에 일어나서 세운 ###목표$$$는 무엇이었나요?"
+          }
+        }
+      }
+    },
     "오늘 하루 되돌아 보기" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -176,6 +294,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "오늘 하루 되돌아 보기"
+          }
+        }
+      }
+    },
+    "키워드 위주로 작성해주세요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus on Keywords"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キーワードで作成してください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "키워드 위주로 작성해주세요"
           }
         }
       }
