@@ -80,10 +80,7 @@ struct IntroView: View {
                     HighlightedText(intro.title)
                         .font(.system(size: 24))
                         .fontWeight(.black)
-                    
-                    Text(NSLocalizedString(intro.subtitle, bundle: .module, comment: ""))
-                        .font(.system(size: 14))
-                        .foregroundStyle(.black.opacity(0.6))
+
                     Text(NSLocalizedString("\(intro.subtitle)", bundle: .module, comment: ""))
                         .font(.system(size: 14))
                         .foregroundStyle(.black.opacity(0.6))
