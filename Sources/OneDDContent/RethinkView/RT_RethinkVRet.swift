@@ -44,11 +44,11 @@ public struct RT_RethinkVRet: View {
                         
                         HStack {
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("오늘 하루 되돌아 보기")
+                                Text("오늘 하루 되돌아 보기", bundle: .module)
                                     .font(.system(.headline, weight: .black))
                                     .foregroundStyle(.white)
                                     .multilineTextAlignment(.leading)
-                                Text("5개의 질문")
+                                Text("5개의 질문", bundle: .module)
                                     .font(.system(.caption))
                                     .foregroundStyle(.white)
                                     .multilineTextAlignment(.leading)
@@ -102,7 +102,7 @@ public struct RT_RethinkVRet: View {
 
 #Preview {
     RT_RethinkVRet()
-        .background(Color.whiteblue)
+        .environment(\.locale, .init(identifier: "en"))
 }
 
 public extension Color {

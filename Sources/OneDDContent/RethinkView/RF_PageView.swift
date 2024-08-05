@@ -16,7 +16,7 @@ struct RF_PageView: View {
     @State private var password: String = ""
     @State private var keyboardHeight: CGFloat = 0
     @State private var gotoroot: Bool = false
-    @StateObject private var pageIntroProvider: PageIntroProvider
+    @StateObject var pageIntroProvider: PageIntroProvider
         
     init() {
         _pageIntroProvider = StateObject(wrappedValue: PageIntroProvider(locale: Locale.current))
@@ -249,6 +249,8 @@ struct IntroView: View {
 
 #Preview {
     RF_PageView()
+        .environment(\.locale, .init(identifier: "ko"))
+
 }
 
 extension Array: RawRepresentable where Element: Codable {
